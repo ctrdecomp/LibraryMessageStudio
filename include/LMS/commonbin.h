@@ -6,7 +6,7 @@ typedef struct LMS_BinaryBlock {
     const void* data;
     char type[4];
     u32 size;
-    u16 unk;
+    u16 sectionCount;
 } LMS_BinaryBlock;
 
 typedef enum LMS_MessageEncoding {

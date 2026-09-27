@@ -1,3 +1,5 @@
+#pragma once
+
 #include "LMS/commonbin.h"
 
 typedef void* (*LMS_AllocFuncPtr)(u32 size);
