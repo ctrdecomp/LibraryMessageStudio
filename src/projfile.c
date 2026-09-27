@@ -87,6 +87,16 @@ LMS_ColorResult LMS_GetColor(LMS_ProjectBinary* prjBinary, s32 id, LMS_Color* ou
 
 // Attributes //
 
+s32 LMS_GetAttrNum(LMS_ProjectBinary* prjBinary)
+{
+    if (prjBinary->atiOffset != -1) 
+    {
+        return *(s32*)(prjBinary->common).blocks[prjBinary->clrOffset].data;
+    }
+
+    return 0;
+}
+
 LMS_AttrInfo* LMS_GetAttrInfo(LMS_ProjectBinary* prjBinary, s32 id)
 {
     if (prjBinary->atiOffset != -1) 

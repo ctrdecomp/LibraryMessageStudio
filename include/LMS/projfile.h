@@ -81,6 +81,7 @@ s32 LMS_GetColorIndexByName(LMS_ProjectBinary* binary, const char* name);
 
 /* Attributes */
 
+s32 LMS_GetAttrNum(LMS_ProjectBinary* prjBinary);
 LMS_AttrInfo* LMS_GetAttrInfo(LMS_ProjectBinary* prjBinary, s32 id);
 LMS_AttrType LMS_GetAttrType(LMS_ProjectBinary* prjBinary, s32 id);
 s32 LMS_GetAttrOffset(LMS_ProjectBinary *prjBinary, s32 id);

@@ -24,3 +24,5 @@ s32 LMS_GetTextIndexByLabel(LMS_MessageBinary* binary, const char* label);
 const char* LMS_GetTextByLabel(LMS_MessageBinary* binary, const char* label);
 
 s32 LMS_GetAttribute(LMS_MessageBinary* binary, int index);
+
+s32 LMS_GetLabelByTextIndex(LMS_MessageBinary* msgBinary, s32 id, const char* output);

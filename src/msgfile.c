@@ -242,3 +242,36 @@ s32 LMS_GetAttribute(LMS_MessageBinary* binary, int index)
     s32* data = (s32*)binary->common.blocks[attrNum].data;
     return data[index];
 }
+
+// NON-MATCHING
+s32 LMS_GetLabelByTextIndex(LMS_MessageBinary* msgBinary, s32 id, const char* output)
+{
+    LMS_BinaryBlock* block = &msgBinary->common.blocks[ *(u32*)((char*)&msgBinary->common + 0x10)];
+
+    const char* data = block->data;
+
+    u32 offset = (*(u32*)data << 3) + 4;
+
+    for (;;)
+    {
+        if (block->size <= offset)
+        {
+            return 0;
+        }
+
+        u8 length = *(u8*)&data[offset];
+
+        u32 textIndex = *(u32*)&data[offset + 1];
+
+        if (textIndex == id)
+        {
+            LMSi_MemCopy((void*)output, &data[offset + 1], length);
+
+            ((char*)output)[length] = '\0';
+
+            return 1;
+        }
+
+        offset += length + 5;
+    }
+}
