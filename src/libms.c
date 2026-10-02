@@ -2,7 +2,7 @@
 //
 // Project: LibMessageStudio for CTR
 
-#include "LMS/libms.h"
+#include <LMS/libms.h>
 
 LMS_AllocFuncPtr LMSi_sAllocFuncPtr;
 LMS_FreeFuncPtr LMSi_sFreeFuncPtr;

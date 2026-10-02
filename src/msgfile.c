@@ -2,8 +2,8 @@
 //
 // Project: LibMessageStudio for CTR
 
-#include "LMS/msgfile.h"
-#include "LMS/libms.h"
+#include <LMS/msgfile.h>
+#include <LMS/libms.h>
 
 typedef struct TextHeader {
     u32 numMessages;

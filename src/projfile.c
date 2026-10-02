@@ -4,13 +4,14 @@
 //
 // TODO: Implement all inlines for this.
 
-#include "LMS/projfile.h"
+#include <LMS/projfile.h>
+#include <LMS/libms.h>
 
 // Impl Proj //
 
 LMS_ProjectBinary* LMS_InitProject(const void* data)
 {
-    LMS_ProjectBinary* binary = (LMS_ProjectBinary*)LMSi_Malloc(0x50);
+    LMS_ProjectBinary* binary = (LMS_ProjectBinary*)LMSi_Malloc(sizeof(LMS_ProjectBinary));
 
     binary->common.data = data;
 
@@ -66,7 +67,7 @@ LMS_ColorResult LMS_GetColor(LMS_ProjectBinary* prjBinary, s32 id, LMS_Color* ou
         return LMS_ColorResult_NoColors;
     }
 
-    const char* colorData = prjBinary->common.blocks[prjBinary->clrOffset].data;
+    const char* colorData = (const char*)prjBinary->common.blocks[prjBinary->clrOffset].data;
 
     s32 colorCount = *(s32*)colorData;
 
@@ -101,7 +102,7 @@ LMS_AttrInfo* LMS_GetAttrInfo(LMS_ProjectBinary* prjBinary, s32 id)
 {
     if (prjBinary->atiOffset != -1) 
     {
-        char* attrData = (char*)prjBinary->common.blocks[prjBinary->atiOffset].data;
+        const char* attrData = (const char*)prjBinary->common.blocks[prjBinary->atiOffset].data;
         LMS_AttrInfo* attrInfos = (LMS_AttrInfo*)&attrData[4];
 
         if (id < *(s32*)attrData) 
@@ -160,7 +161,7 @@ s32 LMS_GetAttrListItemNum(LMS_ProjectBinary* prjBinary, s32 id)
             return 0;
         }
 
-        char* ali2Data = (char*)prjBinary->common.blocks[prjBinary->aliOffset].data;
+        const char* ali2Data = (const char*)prjBinary->common.blocks[prjBinary->aliOffset].data;
 
         s32 listItemNum = *(s32*)&ali2Data[*(u32*)&ali2Data[attrInfo->listId * 4 + 4]];
 
@@ -203,7 +204,7 @@ LMS_Style* LMS_GetStyle(LMS_ProjectBinary* prjBinary, s32 id)
 {
     if (prjBinary->sylOffset != -1) 
     {
-        const char* styleData = prjBinary->common.blocks[prjBinary->sylOffset].data;
+        const char* styleData = (const char*)prjBinary->common.blocks[prjBinary->sylOffset].data;
         LMS_Style* styles = (LMS_Style*)&styleData[4];
 
         if (id < *(u32*)styleData) 
@@ -224,7 +225,7 @@ s32 LMS_GetRegionWidth(LMS_ProjectBinary* prjBinary, s32 id)
         return -1;
     }
     
-    const char* styleData = prjBinary->common.blocks[prjBinary->sylOffset].data;
+    const char* styleData = (const char*)prjBinary->common.blocks[prjBinary->sylOffset].data;
     LMS_Style* styles = (LMS_Style*)&styleData[4];
     if (id < *(u32*)styleData) 
     {
@@ -241,7 +242,7 @@ s32 LMS_GetLineNum(LMS_ProjectBinary* prjBinary, s32 id)
         return -1;
     }
     
-    const char* styleData = prjBinary->common.blocks[prjBinary->sylOffset].data;
+    const char* styleData = (const char*)prjBinary->common.blocks[prjBinary->sylOffset].data;
     LMS_Style* styles = (LMS_Style*)&styleData[4];
     if (id < *(u32*)styleData) 
     {
@@ -258,7 +259,7 @@ s32 LMS_GetFontIndex(LMS_ProjectBinary* prjBinary, s32 id)
         return -1;
     }
     
-    const char* styleData = prjBinary->common.blocks[prjBinary->sylOffset].data;
+    const char* styleData = (const char*)prjBinary->common.blocks[prjBinary->sylOffset].data;
     LMS_Style* styles = (LMS_Style*)&styleData[4];
     if (id < *(u32*)styleData) 
     {
@@ -282,7 +283,7 @@ s32 LMS_GetBaseColorIndex(LMS_ProjectBinary* prjBinary, s32 id)
         return -1;
     }
     
-    const char* styleData = prjBinary->common.blocks[prjBinary->sylOffset].data;
+    const char* styleData = (const char*)prjBinary->common.blocks[prjBinary->sylOffset].data;
     LMS_Style* styles = (LMS_Style*)&styleData[4];
     if (id < *(u32*)styleData) 
     {
@@ -316,7 +317,7 @@ const char* LMS_GetContentPath(LMS_ProjectBinary* prjBinary, s32 id)
         return NULL;
     }
 
-    const char* data = prjBinary->common.blocks[prjBinary->ctiOffset].data;
+    const char* data = (const char*)prjBinary->common.blocks[prjBinary->ctiOffset].data;
 
     if (id < *(s32*)data) 
     {

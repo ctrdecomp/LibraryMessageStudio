@@ -3,7 +3,7 @@
 #include "LMS/commonbin.h"
 #include <stddef.h>
 
-typedef struct{
+typedef struct LMS_ProjectBinary {
     LMS_Binary common;
     s32 clbOffset;
     s32 clrOffset;
@@ -25,7 +25,7 @@ LMS_ProjectBinary* LMS_InitProject(const void* data);
 void LMS_CloseProject(LMS_ProjectBinary* binary);
 s32 LMS_SearchProjectBlockByName(LMS_ProjectBinary *binary, const char* blockName);
 
-typedef struct
+typedef struct LMS_Color
 {
     u8 r;
     u8 g;
@@ -33,14 +33,14 @@ typedef struct
     u8 a;
 } LMS_Color;
 
-typedef struct
+typedef struct LMS_AttrInfo
 {
     s8 type;
     u16 listId;
     s32 offset;
 } LMS_AttrInfo;
 
-typedef struct
+typedef struct LMS_Style
 {
     int regionWidth;
     int lineNum;
@@ -49,7 +49,7 @@ typedef struct
 } LMS_Style;
 
 
-typedef enum
+typedef enum LMS_AttrType
 {
     LMS_AttrType_Uint8,
     LMS_AttrType_Uint16,
@@ -63,7 +63,7 @@ typedef enum
     LMS_AttrType_List
 } LMS_AttrType;
 
-typedef enum
+typedef enum LMS_ColorResult
 {
     LMS_ColorResult_NoColors = -5,
     LMS_ColorResult_ColorLabelNotFound = -2,
@@ -81,7 +81,6 @@ s32 LMS_GetColorIndexByName(LMS_ProjectBinary* binary, const char* name);
 
 /* Attributes */
 
-s32 LMS_GetAttrNum(LMS_ProjectBinary* prjBinary);
 LMS_AttrInfo* LMS_GetAttrInfo(LMS_ProjectBinary* prjBinary, s32 id);
 LMS_AttrType LMS_GetAttrType(LMS_ProjectBinary* prjBinary, s32 id);
 s32 LMS_GetAttrOffset(LMS_ProjectBinary *prjBinary, s32 id);

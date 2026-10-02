@@ -2,8 +2,8 @@
 //
 // Project: LibMessageStudio for CTR
 
-#include "LMS/commonbin.h"
-#include "LMS/libms.h"
+#include <LMS/commonbin.h>
+#include <LMS/libms.h>
 
 s32 LMSi_GetHashTableIndexFromLabel(const char* label, u32 numSlots)
 {
