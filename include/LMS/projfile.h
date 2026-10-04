@@ -33,13 +33,6 @@ typedef struct LMS_Color
     u8 a;
 } LMS_Color;
 
-typedef struct LMS_AttrInfo
-{
-    s8 type;
-    u16 listId;
-    s32 offset;
-} LMS_AttrInfo;
-
 typedef struct LMS_Style
 {
     int regionWidth;
@@ -51,6 +44,7 @@ typedef struct LMS_Style
 
 typedef enum LMS_AttrType
 {
+    LMS_AttrType_Invalid = -1,
     LMS_AttrType_Uint8,
     LMS_AttrType_Uint16,
     LMS_AttrType_Uint32,
@@ -62,6 +56,14 @@ typedef enum LMS_AttrType
     LMS_AttrType_PrefixString_16,
     LMS_AttrType_List
 } LMS_AttrType;
+
+typedef struct LMS_AttrInfo
+{
+    LMS_AttrType type;
+    u16 listId;
+    s32 offset;
+} LMS_AttrInfo;
+
 
 typedef enum LMS_ColorResult
 {
@@ -81,6 +83,7 @@ s32 LMS_GetColorIndexByName(LMS_ProjectBinary* binary, const char* name);
 
 /* Attributes */
 
+s32 LMS_GetAttrNum(LMS_ProjectBinary* prjBinary);
 LMS_AttrInfo* LMS_GetAttrInfo(LMS_ProjectBinary* prjBinary, s32 id);
 LMS_AttrType LMS_GetAttrType(LMS_ProjectBinary* prjBinary, s32 id);
 s32 LMS_GetAttrOffset(LMS_ProjectBinary *prjBinary, s32 id);

@@ -15,7 +15,7 @@ LMS_ProjectBinary* LMS_InitProject(const void* data)
 
     binary->common.data = data;
 
-    LMSi_AnalyzeMessageBinary(&binary->common, "MsgPrjBn", 4);
+    LMSi_AnalyzeMessageBinary(&binary->common, "MsgPrjBn");
 
     binary->clrOffset = LMSi_SearchBlockByName(&binary->common, "CLR1");
     binary->clbOffset = LMSi_SearchBlockByName(&binary->common, "CLB1");
@@ -127,7 +127,7 @@ LMS_AttrType LMS_GetAttrType(LMS_ProjectBinary* prjBinary, s32 id)
 
     if (!attrInfo) 
     {
-        return (u8)-1;
+        return LMS_AttrType_Invalid;
     }
 
     return attrInfo->type;

@@ -93,7 +93,7 @@ LMS_Binary* LMSi_AnalyzeMessageBlocks(LMS_Binary* binary)
             header++;
         }
         curBlock->size = *(u32*)binary->data + header;
-        curBlock->sectionCount = (u16)binary->data + header + 4;
+        curBlock->sectionCount = *(u16*) binary->data + header + 4;
     }
 
     return binary;

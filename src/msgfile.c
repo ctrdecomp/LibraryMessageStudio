@@ -248,7 +248,7 @@ s32 LMS_GetLabelByTextIndex(LMS_MessageBinary* msgBinary, s32 id, const char* ou
 {
     LMS_BinaryBlock* block = &msgBinary->common.blocks[ *(u32*)((char*)&msgBinary->common + 0x10)];
 
-    const char* data = block->data;
+    const char* data = (const char*)block->data;
 
     u32 offset = (*(u32*)data << 3) + 4;
 
