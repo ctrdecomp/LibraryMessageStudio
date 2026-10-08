@@ -9,7 +9,8 @@ s32 LMSi_GetHashTableIndexFromLabel(const char* label, u32 numSlots)
 {
     u32 hash = 0;
 
-    for (int i = 0; label[i] != '\0'; ++i)
+    int i;
+    for (i = 0; label[i] != '\0'; ++i)
     {
         hash = hash * 0x492 + label[i];
     }
@@ -20,7 +21,8 @@ s32 LMSi_GetHashTableIndexFromLabel(const char* label, u32 numSlots)
 s32 LMSi_SearchBlockByName(LMS_Binary* binary, const char* blockName)
 {
     u16 blocks = binary->numBlocks;
-    for (u16 index = 0; index < binary->numBlocks; index++) 
+    u16 index;
+    for (index = 0; index < binary->numBlocks; index++) 
     {
         if (LMSi_MemCmp(binary->blocks[index].type, blockName, sizeof(binary->blocks[index].type)))
         {
@@ -34,7 +36,8 @@ s32 LMSi_SearchBlockByName(LMS_Binary* binary, const char* blockName)
 
 LMS_BinaryBlock* LMSi_GetBlockInfoByName(LMS_Binary* binary, const char* name)
 {
-    for (s32 i = 0; i < binary->numBlocks; i++) 
+    s32 i;
+    for (i = 0; i < binary->numBlocks; i++) 
     {
         if (LMSi_MemCmp(binary->blocks[i].type, name, sizeof(binary->blocks[i].type))) 
         {
@@ -81,19 +84,22 @@ LMS_Binary* LMSi_AnalyzeMessageBlocks(LMS_Binary* binary)
 {
     s32 curBlockDataOffset = 32;
 
-    for (s64 i = 0; i < binary->numBlocks; i++)
+    s64 i;
+    for (i = 0; i < binary->numBlocks; i++)
     {
         LMS_BinaryBlock* curBlock = &binary->blocks[i];
 
         curBlock->data = (const char*)binary->data + (curBlockDataOffset + 0x10);
         s32 header = curBlockDataOffset;
-        for(s32 j = 0; i < 4; j++)
+
+        s32 j;
+        for(j = 0; j < 4; j++)
         {
-            curBlock->type[j] = *(char*)binary->data + header;
+            curBlock->type[j] = *((const char*)binary->data + header);
             header++;
         }
-        curBlock->size = *(u32*)binary->data + header;
-        curBlock->sectionCount = *(u16*) binary->data + header + 4;
+        curBlock->size = *(const u32*)((const char*)binary->data + header);
+        curBlock->sectionCount = *(const u16*)((const char*)binary->data + header + 4);
     }
 
     return binary;

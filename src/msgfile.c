@@ -198,7 +198,7 @@ s32 LMS_GetTextIndexByLabel(LMS_MessageBinary* msgBinary, const char* label)
         const char* lbl1Data = (const char*)lbl1Block->data;
         u32* hashTableData = (u32*)lbl1Block->data;
         s32 hashTableID = LMSi_GetHashTableIndexFromLabel(label, *lbl1Data);
-        u32 labelCount = hashTableData[hashTableID * 2 + 1];
+        u32 labelCount  = hashTableData[hashTableID * 2 + 1];
         u32 labelOffset = hashTableData[hashTableID * 2 + 2];
 
         if (labelCount == 0) 
@@ -206,7 +206,8 @@ s32 LMS_GetTextIndexByLabel(LMS_MessageBinary* msgBinary, const char* label)
             return -1;
         }
 
-        for (u32 i = 0; i <= labelCount; i++) 
+        u32 i;
+        for (i = 0; i <= labelCount; i++) 
         {
             s32 size = *(u8*)&lbl1Data[labelOffset];
             if (size  == nameLength && LMSi_MemCmp(label, &lbl1Data[labelOffset + 1], size) != 0) 

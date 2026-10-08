@@ -3,6 +3,10 @@
 #include "LMS/commonbin.h"
 #include <stddef.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef struct LMS_ProjectBinary {
     LMS_Binary common;
     s32 clbOffset;
@@ -110,3 +114,7 @@ s32 LMS_GetBaseColorIndex(LMS_ProjectBinary* prjBinary, s32 id);
 
 s32 LMS_GetContentsNum(LMS_ProjectBinary* prjBinary);
 const char* LMS_GetContentPath(LMS_ProjectBinary* prjBinary, s32 id);
+
+#ifdef __cplusplus
+}
+#endif

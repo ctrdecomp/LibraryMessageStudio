@@ -1,7 +1,10 @@
 #pragma once
 
 #include "LMS/commonbin.h"
-#include <stddef.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 typedef struct LMS_MessageBinary {
     LMS_Binary common;
@@ -17,12 +20,14 @@ void LMS_CloseMessage(LMS_MessageBinary* binary);
 const char* LMS_GetText(LMS_MessageBinary* binary, int index);
 s32 LMS_GetTextSize(LMS_MessageBinary* binary, s32 id);
 s32 LMS_GetTextNum(LMS_MessageBinary* binary);
-
 s32 LMS_GetTextStyle(LMS_MessageBinary* binary, s32 id);
 s32 LMS_GetTextStyleByLabel(LMS_MessageBinary* binary, const char* label);
 s32 LMS_GetTextIndexByLabel(LMS_MessageBinary* binary, const char* label);
 const char* LMS_GetTextByLabel(LMS_MessageBinary* binary, const char* label);
 
 s32 LMS_GetAttribute(LMS_MessageBinary* binary, int index);
-
 s32 LMS_GetLabelByTextIndex(LMS_MessageBinary* msgBinary, s32 id, const char* output);
+
+#ifdef __cplusplus
+}
+#endif

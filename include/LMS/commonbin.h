@@ -2,6 +2,10 @@
 
 #include "LMS/types.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef struct LMS_BinaryBlock {
     const void* data;
     char type[4];
@@ -32,3 +36,7 @@ s32 LMSi_SearchBlockByName(LMS_Binary* binary, const char* blockName);
 void LMSi_AnalyzeMessageBinary(LMS_Binary* binary, const char* magic);
 void LMSi_AnalyzeMessageHeader(LMS_Binary* binary);
 LMS_Binary* LMSi_AnalyzeMessageBlocks(LMS_Binary* binary);
+
+#ifdef __cplusplus
+}
+#endif
